@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Impede a listagem de diretórios
+Options -Indexes
+
+# Se o arquivo ou diretório físico não existir, redireciona para o index.php mantendo a URL
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
