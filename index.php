@@ -3,8 +3,11 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
+// Garante o caminho absoluto baseado no diretório atual do script no servidor
+$base_path = __DIR__ . '/';
+
 // Garante que os usuários padrão existem no banco em qualquer acesso inicial
-require_once 'model/Usuario.php';
+require_once $base_path . 'model/Usuario.php';
 Usuario::criarAdminPadrao();
 Usuario::criarBeneficiarioPadrao();
 
@@ -17,7 +20,7 @@ $url = explode('/', $url);
 $controllerName = ucfirst($url[0]) . 'Controller';
 $action = isset($url[1]) ? $url[1] : 'index';
 
-$controllerFile = 'controll/' . $controllerName . '.php';
+$controllerFile = $base_path . 'controll/' . $controllerName . '.php';
 
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
@@ -35,7 +38,7 @@ if (file_exists($controllerFile)) {
 } else {
     // Se cair aqui ou na home
     if ($url[0] == 'home' || $url[0] == '') {
-        require_once 'controll/HomeController.php';
+        require_once $base_path . 'controll/HomeController.php';
         $home = new HomeController();
         $home->index();
     } else {
