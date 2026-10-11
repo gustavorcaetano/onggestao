@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS onggestao CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE onggestao;
 
 -- 1. Tabela de Usuários (Admin, Doador, Beneficiário)
 DROP TABLE IF EXISTS usuarios;
