@@ -5,10 +5,10 @@ class Conexao {
     public static function getConexao() {
         if (self::$instance === null) {
             $host = 'localhost';
-            $dbname = 'onggestao'; // Atualizado para o nome correto do banco
-            $username = 'root';    
-            $password = 'root';    
-            $port = '8889';        
+            $dbname = 'onggestao'; // Nome do seu banco local no MAMP
+            $username = 'root';    // Usuário padrão do MAMP
+            $password = 'root';    // Senha padrão do MAMP (ou vazia '' se você não usa senha)
+            $port = '8889';        // Porta padrão do MySQL no MAMP
 
             try {
                 self::$instance = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $username, $password);

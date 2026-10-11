@@ -1,0 +1,1 @@
+<?php echo "MAMP está a funcionar aqui!"; ?>
