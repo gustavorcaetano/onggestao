@@ -1,9 +1,13 @@
-RewriteEngine On
-
-# Impede listagem de diretórios por segurança
+# Impede a listagem de arquivos da pasta por segurança
 Options -Indexes
 
-# Redireciona requisições para o index.php mantendo a URL amigável
+# Define o index.php como padrão
+DirectoryIndex index.php
+
+# Ativa o motor de reescrita de URLs
+RewriteEngine On
+
+# Se o arquivo ou diretório físico NÃO existir no servidor, joga para o index.php processar a rota
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
