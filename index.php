@@ -11,7 +11,7 @@ require_once $base_path . 'model/Usuario.php';
 Usuario::criarAdminPadrao();
 Usuario::criarBeneficiarioPadrao();
 
-// Pega a URL do parâmetro ?url=... enviado pelo navegador
+// Pega a url do parâmetro ?url=... enviado pelo navegador
 $url = isset($_GET['url']) ? $_GET['url'] : 'home';
 $url = rtrim($url, '/');
 $url = filter_var($url, FILTER_SANITIZE_URL);
