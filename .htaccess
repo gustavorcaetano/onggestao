@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Se o arquivo ou diretﾃｳrio fﾃｭsico Nﾃグ existir no servidor, joga para o index.php processar a rota
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php?uri=$1 [QSA,L]
