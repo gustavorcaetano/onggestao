@@ -1,0 +1,102 @@
+{
+  "urlRequestHTTP": "ctrlUsuario",
+  "fields": {
+    "idUsuario": {
+      "label": "Código",
+      "type": "hidden",
+      "required": true,
+      "readonly": true,
+      "classCss": ""
+    },
+    "email": {
+      "label": "Email",
+      "type": "email",
+      "required": true,
+      "readonly": false,
+      "maskPattern": ""
+    },
+    "senha": {
+      "label": "Senha",
+      "placeholder": "Digite sua senha:",
+      "type": "password",
+      "required": true,
+      "readonly": false,
+      "maskPattern": ""
+    },
+    "idNivelUsuario": {
+      "type": "select",
+      "dataOptions": [
+        {"value": "1", "text": "Cliente"},
+        {"value": "2", "text": "Funcionário"},
+        {"value": "3", "text": "Caixa"},
+        {"value": "4", "text": "Financeiro"},
+        {"value": "5", "text": "Gerente"},
+        {"value": "6", "text": "Diretor"},
+        {"value": "7", "text": "Administrador"}
+      ],
+      "required": true,
+      "readonly": false,
+      "maskPattern": ""
+    },
+    "nome": {
+      "type": "text",
+      "required": true,
+      "readonly": false,
+      "maskPattern": ""
+    },
+    "cpf": {
+      "type": "text",
+      "required": true,
+      "readonly": false,
+      "maskPattern": "000.000.000-00"
+    },
+    "endereco": {
+      "type": "text",
+      "required": false,
+      "readonly": false,
+      "maskPattern": ""
+    },
+    "bairro": {
+      "type": "text",
+      "required": false,
+      "readonly": false,
+      "maskPattern": ""
+    },
+    "cidade": {
+      "type": "text",
+      "required": true,
+      "readonly": false,
+      "maskPattern": ""
+    },
+    "uf": {
+      "type": "text",
+      "required": false,
+      "readonly": false,
+      "maskPattern": "AA"
+    },
+    "cep": {
+      "type": "text",
+      "required": true,
+      "readonly": false,
+      "maskPattern": "00000-000"
+    },
+    "telefone": {
+      "type": "text",
+      "required": false,
+      "readonly": false,
+      "maskPattern": "(00) 0000-00009"
+    },
+    "foto": {
+      "type": "text",
+      "required": false,
+      "readonly": false,
+      "maskPattern": ""
+    },
+    "ativo": {
+      "type": "text",
+      "required": false,
+      "readonly": false,
+      "maskPattern": ""
+    }
+  }
+}

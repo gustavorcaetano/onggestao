@@ -1,0 +1,159 @@
+{
+    "home" : { 
+        "path" : "app/views/home.php",
+        "sessionKey": [{"usuario_id": false}], 
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    },
+    "auth/login" : {
+        "path" : "app/controllers/AuthController.php",
+        "sessionKey": [{"usuario_id": false}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    },
+    "auth/esqueciSenha" : {
+        "path" : "app/controllers/AuthController.php",
+        "sessionKey": [{"usuario_id": false}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    },
+    "auth/registrar" : {
+        "path" : "app/controllers/AuthController.php",
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    },
+    "auth/logout" : {
+        "path" : "app/controllers/AuthController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    },
+    "auth/enviarRecuperacao" : {
+        "path" : "app/controllers/AuthController.php",
+        "sessionKey": [{"usuario_id": false}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    },
+    "auth/novaSenha" : {
+        "path" : "app/controllers/AuthController.php",
+        "sessionKey": [{"usuario_id": false}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    },
+    "auth/salvarNovaSenha" : {
+        "path" : "app/controllers/AuthController.php",
+        "sessionKey": [{"usuario_id": false}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    },
+    "admin/dashboard" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "admin/acoes" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "admin/cadastrarAdmin" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "admin/atualizarAcao" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "admin/excluirAcao" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "familia/cadastrar" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "familia/atualizar" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "familia/excluir" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "beneficiario/painel" : {
+        "path" : "app/controllers/BeneficiarioController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "beneficiario/solicitar" : {
+        "path" : "app/controllers/BeneficiarioController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "beneficiario/cancelarSolicitacao" : {
+        "path" : "app/controllers/BeneficiarioController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "solicitacao/index" : {
+        "path" : "app/controllers/SolicitacaoController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "solicitacao/alterarStatus" : {
+        "path" : "app/controllers/SolicitacaoController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "solicitacao/cadastrar" : {
+        "path" : "app/controllers/BeneficiarioController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "doacao/index" : {
+        "path" : "app/controllers/DoacaoController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "admin/aprovarBeneficiario" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "admin/rejeitarBeneficiario" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "admin/cadastrarAcao" : {
+        "path" : "app/controllers/AdminController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false},
+        "errorPath" : "app/views/auth/login.php"
+    },
+    "doador/painel" : {
+        "path" : "app/controllers/DoadorController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    },
+    "doador/doar" : {
+        "path" : "app/controllers/DoadorController.php",
+        "sessionKey": [{"usuario_id": true}],
+        "sanitize"  : {"requestVars" : true, "code" : false, "sql" : false}
+    }
+}
