@@ -4,6 +4,7 @@ use core\database\DBConnection;
 
 class Usuario {
 
+    // Método para autenticar o usuário
     public static function autenticar($email, $senha) {
         try {
             // Utiliza a classe de conexão oficial do framework
@@ -23,6 +24,7 @@ class Usuario {
         }
     }
 
+    // Método para criar o usuário administrador padrão
     public static function criarAdminPadrao() {
         try {
             $db = (new DBConnection())->getConn();
@@ -32,6 +34,7 @@ class Usuario {
 
             $senhaHash = password_hash("123456", PASSWORD_DEFAULT);
 
+            // Se o administrador não existir, cria um novo; caso contrário, atualiza a senha
             if (!$admin) {
                 $insert = $db->prepare("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (:nome, :email, :senha, :tipo)");
                 $insert->execute([
@@ -40,7 +43,9 @@ class Usuario {
                     ':senha' => $senhaHash,
                     ':tipo' => 'admin'
                 ]);
-            } else {
+            } 
+            // Se o administrador já existir, atualiza a senha
+            else {
                 $update = $db->prepare("UPDATE usuarios SET senha = :senha WHERE email = 'admin@ong.com'");
                 $update->execute([':senha' => $senhaHash]);
             }
@@ -49,15 +54,21 @@ class Usuario {
         }
     }
 
+    // Método para criar o usuário beneficiário padrão
     public static function criarBeneficiarioPadrao() {
         try {
+            // Utiliza a classe de conexão oficial do framework
             $db = (new DBConnection())->getConn();
+            // Verifica se o beneficiário já existe
             $stmt = $db->prepare("SELECT * FROM usuarios WHERE email = 'beneficiario@ong.com'");
             $stmt->execute();
+            // Busca o beneficiário no banco de dados
             $beneficiario = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            // Gera o hash da senha padrão
             $senhaHash = password_hash("123456", PASSWORD_DEFAULT);
 
+            // Se o beneficiário não existir, cria um novo; caso contrário, atualiza a senha
             if (!$beneficiario) {
                 $insert = $db->prepare("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (:nome, :email, :senha, :tipo)");
                 $insert->execute([
@@ -70,7 +81,9 @@ class Usuario {
                 $update = $db->prepare("UPDATE usuarios SET senha = :senha WHERE email = 'beneficiario@ong.com'");
                 $update->execute([':senha' => $senhaHash]);
             }
-        } catch (PDOException $e) {
+        } 
+        // Se ocorrer algum erro de banco de dados, o catch irá capturar a exceção e o tratamento será silencioso
+        catch (PDOException $e) {
             // Tratamento silencioso
         }
     }
