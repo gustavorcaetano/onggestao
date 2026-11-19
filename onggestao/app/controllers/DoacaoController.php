@@ -1,14 +1,17 @@
 <?php
-
+// Arquivo: onggestao/app/controllers/DoacaoController.php
 use core\database\DBConnection;
 
+// Verifica se a classe Doacao existe antes de inclu铆-la, garantindo que o arquivo de modelo seja carregado apenas se estiver presente no caminho especificado
 global $rootPath;
 if (file_exists($rootPath . '/app/models/Doacao.php')) {
     require_once $rootPath . '/app/models/Doacao.php';
 }
 
+// Classe DoacaoController gerencia as a莽玫es relacionadas 脿s doa莽玫es, incluindo listagem e cadastro de novas doa莽玫es.
 class DoacaoController {
     
+    // Construtor que verifica se o usu谩rio est谩 logado e 茅 do tipo admin. Caso contr谩rio, redireciona para a p谩gina de login.
     public function __construct() {
         if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_tipo'] !== 'admin') {
             header("Location: " . $_SESSION['url']['root'] . "auth/login");
@@ -16,14 +19,17 @@ class DoacaoController {
         }
     }
 
+    // M茅todo para exibir a lista de doa莽玫es cadastradas, incluindo informa莽玫es sobre benefici谩rios pendentes e pedidos pendentes.
     public function index() {
         global $rootPath;
 
+        // Verifica se a classe Doacao existe antes de chamar o m茅todo listarTodas, garantindo que a listagem de doa莽玫es seja realizada apenas se o modelo estiver presente
         $doacoes = class_exists('Doacao') ? Doacao::listarTodas() : [];
         
+        // Tenta buscar informa莽玫es sobre benefici谩rios pendentes e pedidos pendentes no banco de dados, tratando poss铆veis exce莽玫es e garantindo que a p谩gina seja carregada corretamente mesmo que n茫o haja registros.
         try {
             $db = (new DBConnection())->getConn();
-            $beneficiariosPendentes = $db->query("SELECT * FROM usuarios WHERE tipo = 'beneficiario' AND (status = 'pendente' OR status = 'Em Análise') ORDER BY id DESC")->fetchAll();
+            $beneficiariosPendentes = $db->query("SELECT * FROM usuarios WHERE tipo = 'beneficiario' AND (status = 'pendente' OR status = 'Em An锟斤拷lise') ORDER BY id DESC")->fetchAll();
             $totalPendentes = count($beneficiariosPendentes);
             $pedidosPendentesCount = $db->query("SELECT COUNT(*) FROM solicitacoes WHERE status = 'Pendente'")->fetchColumn();
         } catch (Exception $e) {
@@ -33,13 +39,14 @@ class DoacaoController {
         }
         try {
             $db = (new DBConnection())->getConn();
-            $beneficiariosPendentes = $db->query("SELECT * FROM usuarios WHERE tipo = 'beneficiario' AND (status = 'pendente' OR status = 'Em Análise') ORDER BY id DESC")->fetchAll();
+            $beneficiariosPendentes = $db->query("SELECT * FROM usuarios WHERE tipo = 'beneficiario' AND (status = 'pendente' OR status = 'Em An锟斤拷lise') ORDER BY id DESC")->fetchAll();
             $totalPendentes = count($beneficiariosPendentes);
         } catch (Exception $e) {
             $beneficiariosPendentes = [];
             $totalPendentes = 0;
         }
         
+        // Carrega a view de doa莽玫es, verificando se o arquivo existe antes de inclu铆-lo. Caso o arquivo n茫o exista, exibe a view do dashboard como fallback.
         $viewPath = $rootPath . '/app/views/admin/doacoes.php';
         if (file_exists($viewPath)) {
             require_once $viewPath;
@@ -48,15 +55,17 @@ class DoacaoController {
         }
     }
 
+    // M茅todo para cadastrar uma nova doa莽茫o, processando os dados enviados via POST e redirecionando para a lista de doa莽玫es ap贸s o cadastro.
     public function cadastrar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dados = [
-                'doador_nome'         => $_POST['doador_nome'] ?? 'Anônimo',
+                'doador_nome'         => $_POST['doador_nome'] ?? 'An锟�0锟�0nimo',
                 'tipo_doacao'         => $_POST['tipo_doacao'] ?? 'Alimento',
                 'quantidade_ou_valor' => $_POST['quantidade_ou_valor'] ?? '',
                 'descricao'           => $_POST['descricao'] ?? ''
             ];
 
+            //  Verifica se a classe Doacao existe antes de chamar o m茅todo cadastrar, garantindo que o cadastro de doa莽玫es seja realizado apenas se o modelo estiver presente
             if (class_exists('Doacao')) {
                 Doacao::cadastrar($dados);
             }
@@ -67,9 +76,11 @@ class DoacaoController {
     }
 }
 
+// Despachante do DoacaoController, que verifica a URI da requisi莽茫o para determinar qual m茅todo do DoacaoController deve ser chamado, permitindo que diferentes a莽玫es relacionadas 脿s doa莽玫es sejam tratadas com base na URL acessada.
 $requestUri = $_SERVER['REQUEST_URI'] ?? '';
 $controllerInstance = new DoacaoController();
 
+// Verifica a URI da requisi莽茫o para determinar qual m茅todo do DoacaoController deve ser chamado, permitindo que diferentes a莽玫es relacionadas 脿s doa莽玫es sejam tratadas com base na URL acessada.
 if (strpos($requestUri, 'doacao/cadastrar') !== false) {
     $controllerInstance->cadastrar();
 } else {
