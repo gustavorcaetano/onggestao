@@ -21,7 +21,7 @@
                 <!-- Botão de Sino Ajustado (Menor, Perfeitamente Circular e Bolinha Azul) -->
                 <button class="btn btn-dark-outline position-relative border-secondary text-light p-0 d-flex align-items-center justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#modalNotificacoes" title="Cadastros Pendentes" style="width: 36px; height: 36px; border-radius: 50%;">
                     <i class="fa-solid fa-bell text-cyan" style="font-size: 14px;"></i>
-                    <?php if ($totalPendentes > 0): ?>
+                    <?php if ($totalPendentes > 0): ?> <!-- Indicador de Notificações Pendentes -->
                         <span class="position-absolute top-0 start-100 translate-middle border border-white rounded-circle shadow-sm" style="width: 13px; height: 13px; background-color: #2dc0ff;">
                             <span class="visually-hidden">Notificações pendentes</span>
                         </span>
@@ -37,6 +37,7 @@
     </nav>
 
     <div class="container mt-4 mb-0">
+        <!-- Mensagens de Sucesso ou Erro -->
         <?php if (!empty($_GET['sucesso'])): ?>
             <div class="alert alert-success bg-dark border-success text-success alert-dismissible fade show p-3 rounded-3 shadow-lg mb-0" role="alert" style="backdrop-filter: blur(8px);">
                 <i class="fa-solid fa-circle-check me-2"></i><strong>Sucesso!</strong> <?php echo htmlspecialchars($_GET['sucesso']); ?>
