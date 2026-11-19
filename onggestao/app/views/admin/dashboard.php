@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <?php
 use core\database\DBConnection;
-$beneficiariosPendentes = [];
+// Buscar o número de beneficiários pendentes para exibir na notificação
+$beneficiariosPendentes = []; // Inicializa a variável como um array vazio para evitar erros caso a consulta falhe
+// Tenta buscar os beneficiários pendentes do banco de dados
 try {
     $db = (new DBConnection())->getConn();
     $beneficiariosPendentes = $db->query("SELECT * FROM usuarios WHERE tipo = 'beneficiario' AND (status = 'pendente' OR status = 'Em Análise') ORDER BY id DESC")->fetchAll();
 } catch (Exception $e) {
     $beneficiariosPendentes = [];
 }
-$totalPendentes = count($beneficiariosPendentes);
+$totalPendentes = count($beneficiariosPendentes); // Conta o total de beneficiários pendentes para exibir na notificação
 ?>
 <html lang="pt-BR">
 <head>
@@ -121,12 +123,12 @@ $totalPendentes = count($beneficiariosPendentes);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (empty($familias)): ?>
+                        <?php if (empty($familias)): ?> <!-- Se não houver famílias cadastradas, exibe uma mensagem -->
                             <tr>
                                 <td colspan="7" class="text-center py-5 text-muted">Nenhuma família cadastrada até o momento.</td>
                             </tr>
                         <?php else: ?>
-                            <?php foreach ($familias as $f): ?>
+                            <?php foreach ($familias as $f): ?> <!-- Loop para exibir cada família na tabela -->
                                 <tr>
                                     <td class="ps-4 fw-bold text-white"><?php echo htmlspecialchars($f['nome_responsavel']); ?></td>
                                     <td><?php echo htmlspecialchars($f['cpf']); ?></td>
@@ -188,7 +190,7 @@ $totalPendentes = count($beneficiariosPendentes);
         </div>
 
 
-        <?php foreach ($familias as $f): ?>
+        <?php foreach ($familias as $f): ?> <!-- Loop para criar modais de edição e exclusão para cada família -->
             <!-- Modal de Edição -->
             <div class="modal fade" id="modalEditarFamilia<?php echo $f['id']; ?>" tabindex="-1">
                 <div class="modal-dialog modal-lg">
@@ -455,6 +457,7 @@ $totalPendentes = count($beneficiariosPendentes);
 
    <!-- Script de Consulta de CEP -->
    <script>
+        // Função para filtrar a tabela de famílias com base no input de pesquisa
         function filtrarTabela() {
             let input = document.getElementById("inputPesquisa").value.toLowerCase();
             let rows = document.querySelectorAll("#tabelaFamilias tbody tr");
@@ -471,6 +474,7 @@ $totalPendentes = count($beneficiariosPendentes);
                 fetch(`https://viacep.com.br/ws/${valorLimpo}/json/`)
                     .then(response => response.json())
                     .then(data => {
+                        // Preenche os campos de endereço com os dados retornados pelo ViaCEP
                         if (!data.erro) {
                             document.getElementById('rua').value = data.logradouro || '';
                             document.getElementById('bairro').value = data.bairro || '';
