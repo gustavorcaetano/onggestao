@@ -28,6 +28,7 @@
 
     <div class="container my-5">
 
+        <!-- Mensagens de Sucesso e Erro -->
         <?php if (!empty($_GET['sucesso'])): ?>
             <div class="alert alert-success bg-dark border-success text-success alert-dismissible fade show p-3 rounded-3 shadow-lg mb-4" role="alert" style="backdrop-filter: blur(8px);">
                 <i class="fa-solid fa-heart me-2 text-cyan"></i><strong>Muito Obrigado!</strong> <?php echo htmlspecialchars($_GET['sucesso']); ?>
@@ -83,12 +84,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (empty($doacoes)): ?>
+                        <!-- Linhas da Tabela -->
+                        <?php if (empty($doacoes)): ?>  <!-- Se não houver doações registradas, exibe uma mensagem de aviso em vez de linhas de dados -->
                             <tr>
                                 <td colspan="4" class="text-center py-5 text-muted">Você ainda não registrou doações em seu nome. Clique acima para doar!</td>
                             </tr>
                         <?php else: ?>
-                            <?php foreach ($doacoes as $d): ?>
+                            <!-- Itens da Tabela -->
+                            <?php foreach ($doacoes as $d): ?> <!-- Itera sobre cada doação registrada e exibe os detalhes em uma linha da tabela -->
                                 <tr>
                                     <td class="ps-4"><span class="badge bg-secondary border border-secondary"><?php echo htmlspecialchars($d['tipo_doacao']); ?></span></td>
                                     <td class="text-cyan fw-bold"><?php echo htmlspecialchars($d['quantidade_ou_valor']); ?></td>
@@ -173,7 +176,7 @@
     <!-- Script para Alternar Exibição do PIX -->
     <script>
         function verificarTipoDoacao() {
-            let select = document.getElementById('tipoDoacaoSelect');
+            let select = document.getElementById('tipoDoacaoSelect'); // Obtém o elemento select do tipo de doação
             let secaoPix = document.getElementById('secaoPix');
             if (select.value === 'Financeiro (PIX)') {
                 secaoPix.classList.remove('d-none');
@@ -182,6 +185,7 @@
             }
         }
 
+        // Função para copiar a chave PIX para a área de transferência e exibir uma mensagem de confirmação
         function copiarChavePix() {
             let input = document.getElementById('chavePixInput');
             input.select();

@@ -21,6 +21,7 @@
                 <!-- Botão de Sino -->
                 <button class="btn btn-dark-outline position-relative border-secondary text-light p-0 d-flex align-items-center justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#modalNotificacoes" title="Cadastros Pendentes" style="width: 36px; height: 36px; border-radius: 50%;">
                     <i class="fa-solid fa-bell text-cyan" style="font-size: 14px;"></i>
+                    <!-- Indicador de Notificações Pendentes -->
                     <?php if (isset($totalPendentes) && $totalPendentes > 0): ?>
                         <span class="position-absolute top-0 start-100 translate-middle border border-white rounded-circle shadow-sm" style="width: 13px; height: 13px; background-color: #2dc0ff;">
                             <span class="visually-hidden">Notificações pendentes</span>
@@ -69,8 +70,9 @@
             
             <a href="<?php echo $_SESSION['url']['root']; ?>solicitacao/index" class="btn btn-cyan-gradient px-4 py-2 btn-sm position-relative">
                 PEDIDOS
+                <!-- Indicador de Notificações Pendentes -->
                 <?php if (isset($pedidosPendentesCount) && $pedidosPendentesCount > 0): ?>
-                    <span class="position-absolute translate-middle rounded-circle border border-white shadow-sm" style="top: 2px; left: 95%; width: 12px; height: 12px; background-color: #2dc0ff;"></span>
+                    <span class="position-absolute translate-middle rounded-circle border border-white shadow-sm" style="top: 2px; left: 95%; width: 12px; height: 12px; background-color: #2dc0ff;"></span> <!-- Pequeno círculo azul indicando pedidos pendentes -->
                 <?php endif; ?>
             </a>
         
@@ -101,7 +103,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (empty($solicitacoes)): ?>
+                        <!-- Linhas da Tabela -->
+                        <?php if (empty($solicitacoes)): ?> <!-- Se não houver solicitações, exibe uma mensagem -->
                             <tr>
                                 <td colspan="6" class="text-center py-5 text-muted">Nenhuma solicitação enviada até o momento.</td>
                             </tr>
@@ -179,9 +182,10 @@
                                 <tbody>
                                     <?php foreach ($beneficiariosPendentes as $bp): ?>
                                         <?php 
-                                            $dbConn = (new \core\database\DBConnection())->getConn();
-                                            $stmtFam = $dbConn->prepare("SELECT * FROM familias WHERE responsavel_id = :uid LIMIT 1");
-                                            $stmtFam->execute([':uid' => $bp['id']]);
+                                        // Buscar informações adicionais da família do beneficiário pendente
+                                            $dbConn = (new \core\database\DBConnection())->getConn(); // Conexão com o banco de dados
+                                            $stmtFam = $dbConn->prepare("SELECT * FROM familias WHERE responsavel_id = :uid LIMIT 1"); // Consulta para obter informações da família com base no ID do beneficiário
+                                            $stmtFam->execute([':uid' => $bp['id']]); // Executa a consulta com o ID do beneficiário
                                             $famData = $stmtFam->fetch();
                                         ?>
                                         <tr>
@@ -243,6 +247,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Função para filtrar os pedidos na tabela com base no input de pesquisa
         function filtrarPedidos() {
             let input = document.getElementById("inputPesquisaPedidos").value.toLowerCase();
             let rows = document.querySelectorAll("#tabelaPedidosLista tbody tr");

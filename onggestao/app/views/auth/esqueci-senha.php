@@ -11,6 +11,7 @@
         <h4 class="text-white fw-bold mb-3">Recuperar Senha</h4>
         <p class="text-muted small">Informe seu e-mail cadastrado para receber as instruções de redefinição.</p>
         
+        <!-- Formulário de Recuperação de Senha -->
         <form action="index.php?url=auth/esqueci-senha" method="POST">
             <div class="mb-3">
                 <input type="email" name="email" class="form-control bg-dark text-light border-secondary" required placeholder="seu@email.com">

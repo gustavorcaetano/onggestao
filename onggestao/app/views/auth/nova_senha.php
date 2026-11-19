@@ -13,6 +13,7 @@
         <h4 class="fw-bold text-cyan mb-3"><i class="fa-solid fa-lock-open me-2"></i>Nova Senha</h4>
         <p class="text-muted small mb-4">Digite sua nova senha abaixo para recuperar o acesso à sua conta.</p>
         
+        <!-- Formulário de Nova Senha -->
         <form action="<?php echo $_SESSION['url']['root']; ?>auth/salvarNovaSenha" method="POST">
             <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
             <div class="mb-3">

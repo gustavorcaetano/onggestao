@@ -68,9 +68,11 @@
             $emAndamento = 0;
             $concluidos = 0;
         
-            if (!empty($solicitacoes)) {
+            // Verifica se há solicitações e conta quantas estão em andamento e quantas foram concluídas, para exibir nos cards de resumo.
+            if (!empty($solicitacoes)) // Se houver solicitações cadastradas, percorre cada uma para determinar seu status e atualizar os contadores de acordo
+                {
                 foreach ($solicitacoes as $item) {
-                    $st = $item['status'] ?? 'Pendente';
+                    $st = $item['status'] ?? 'Pendente'; // Obtém o status da solicitação, considerando "Pendente" como padrão caso não esteja definido
                     if ($st === 'Pendente' || $st === 'Aprovado') {
                         $emAndamento++;
                     } elseif ($st === 'Entregue') {
@@ -198,14 +200,16 @@
                 <p class="text-muted small mb-0">Fique por dentro dos mutirões, entregas especiais e eventos organizados pela ONG.</p>
             </div>
         
-            <?php if (empty($acoesOng)): ?>
+            <!-- Lista de Ações e Campanhas -->
+            <?php if (empty($acoesOng)): ?> <!-- Se não houver ações ou campanhas cadastradas, exibe uma mensagem de aviso em vez de cards -->
                 <div class="bg-black border border-secondary border-opacity-25 rounded-4 p-4 text-center text-muted">
                     <i class="fa-regular fa-calendar-xmark fs-4 mb-2 d-block text-secondary"></i>
                     Nenhuma ação ou campanha programada no momento.
                 </div>
             <?php else: ?>
                 <div class="row g-3">
-                    <?php foreach ($acoesOng as $acao): ?>
+                    <!-- Cards de Ações e Campanhas -->
+                    <?php foreach ($acoesOng as $acao): ?> <!-- Itera sobre cada ação ou campanha cadastrada e exibe os detalhes em um card -->
                         <div class="col-md-4">
                             <div class="bg-black border border-secondary border-opacity-25 rounded-4 p-4 h-100 d-flex flex-column justify-content-between shadow-sm">
                                 <div>

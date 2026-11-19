@@ -96,6 +96,7 @@
     </div>
 
     <script>
+        // Função para alternar a visibilidade da senha no campo de login
         function alternarSenha() {
             const inputSenha = document.getElementById('senhaLogin');
             const iconeOlho = document.getElementById('toggleSenha');

@@ -20,6 +20,7 @@
             <p class="text-muted small mt-2">Preencha os dados para criar sua conta</p>
         </div>
 
+        <!-- Mensagem de Erro -->
         <?php if (!empty($_GET['erro'])): ?>
             <div class="alert alert-danger bg-dark border-danger text-danger alert-dismissible fade show p-2 mb-3 rounded-3 shadow-sm text-start small" role="alert">
                 <i class="fa-solid fa-triangle-exclamation me-1"></i><strong>Atenção:</strong> <?php echo htmlspecialchars($_GET['erro']); ?>
@@ -27,6 +28,7 @@
             </div>
         <?php endif; ?>
 
+        <!-- Formulário de Registro -->
         <form action="<?php echo $_SESSION['url']['root']; ?>auth/registrar" method="POST">
             <div class="row g-3">
                 <div class="col-12">
@@ -106,12 +108,14 @@
     </div>
 
     <script>
+        // Função para alternar a exibição dos campos do beneficiário com base no tipo de conta selecionado
         function alternarCampos() {
             let tipo = document.getElementById('tipoConta').value;
             let bloco = document.getElementById('blocoBeneficiario');
             bloco.style.display = (tipo === 'beneficiario') ? 'flex' : 'none';
         }
 
+        // Função para consultar o CEP e preencher automaticamente os campos de endereço
         function consultarCep(cep) {
             let valor = cep.replace(/\D/g, '');
             if (valor.length === 8) {
@@ -127,7 +131,7 @@
             }
         }
     </script>
-    <script src="<?php echo $_SESSION['url']['root']; ?>public/assets/js/mascaras.js"></script>
+    <script src="<?php echo $_SESSION['url']['root']; ?>public/assets/js/mascaras.js"></script> // Inclui o arquivo de máscaras para formatação de campos como CPF, telefone, CEP e renda
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
