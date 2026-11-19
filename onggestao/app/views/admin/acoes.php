@@ -1,9 +1,11 @@
 <?php
 use core\database\DBConnection;
-if (!isset($beneficiariosPendentes)) {
+// Buscar o número de beneficiários pendentes para exibir na notificação
+if (!isset($beneficiariosPendentes)) { // Inicializa a variável como um array vazio para evitar erros caso a consulta falhe
     $beneficiariosPendentes = [];
     try {
         $db = (new DBConnection())->getConn();
+        // Consulta para buscar beneficiários com status "pendente" ou "Em Análise", ordenados pelo ID em ordem decrescente
         $beneficiariosPendentes = $db->query("SELECT * FROM usuarios WHERE tipo = 'beneficiario' AND (status = 'pendente' OR status = 'Em Análise') ORDER BY id DESC")->fetchAll();
     } catch (Exception $e) {
         $beneficiariosPendentes = [];
@@ -115,7 +117,7 @@ $totalPendentes = count($beneficiariosPendentes);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (empty($acoes)): ?>
+                        <?php if (empty($acoes)): ?> <!-- Se não houver ações cadastradas, exibe uma mensagem -->
                             <tr>
                                 <td colspan="4" class="text-center py-5 text-muted">Nenhuma ação cadastrada até o momento.</td>
                             </tr>
@@ -144,7 +146,7 @@ $totalPendentes = count($beneficiariosPendentes);
         </div>
 
         <!-- Modais de Edição e Exclusão para cada Ação -->
-        <?php foreach ($acoes as $a): ?>
+        <?php foreach ($acoes as $a): ?> <!-- Loop para criar modais de edição e exclusão para cada ação -->
             <!-- Modal Editar Ação -->
             <div class="modal fade" id="modalEditarAcao<?php echo $a['id']; ?>" tabindex="-1">
                 <div class="modal-dialog">
