@@ -1,8 +1,11 @@
 <?php
+// Arquivo: onggestao/app/views/home.php
 use core\database\DBConnection;
+// Verifica se a sessão foi iniciada, caso contrário, inicia a sessão para gerenciar informações do usuário e configurações do sistema.
 $acoes = [];
 try {
     $db = (new DBConnection())->getConn();
+    // Busca as ações cadastradas no banco de dados, ordenando por ID em ordem decrescente para exibir as mais recentes primeiro.
     $acoes = $db->query("SELECT * FROM acoes ORDER BY id DESC")->fetchAll();
 } catch (Exception $e) {
     $acoes = [];
@@ -55,6 +58,7 @@ try {
                     </div> 
                 </div> 
 
+                <!-- Link para saiba mais -->
                 <a href="#projeto" class="text-white fw-bold small text-decoration-none d-inline-flex align-items-center gap-2 mt-2"> 
                     <i class="fa-solid fa-arrow-down text-cyan"></i> Saiba mais sobre nosso projeto 
                 </a> 
@@ -124,7 +128,8 @@ try {
                 <p class="text-muted small">Acompanhe o impacto do nosso trabalho em tempo real.</p> 
             </div> 
 
-            <?php if (empty($acoes)): ?> 
+            <!-- Componente Carousel do Bootstrap --> 
+            <?php if (empty($acoes)): ?>   <!-- Se não houver ações cadastradas, exibe uma mensagem de aviso em vez do carrossel -->
                 <div class="card-impact bg-black border border-secondary text-light text-center py-5 rounded-4 shadow-lg"> 
                     <p class="text-muted mb-0">Nenhuma ação cadastrada no momento.</p> 
                 </div> 
@@ -133,9 +138,10 @@ try {
                 <div id="carouselAcoes" class="carousel slide shadow-lg rounded-4 overflow-hidden" data-bs-ride="carousel" style="max-width: 900px; margin: 0 auto; border: 1px solid rgba(45, 192, 255, 0.3);"> 
                      
                     <div class="carousel-inner bg-black"> 
+                        <!-- Itens do carrossel -->
                         <?php foreach ($acoes as $index => $acao): ?> 
                             <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>" data-bs-interval="5000"> 
-                                <?php if (!empty($acao['imagem'])): ?> 
+                                <?php if (!empty($acao['imagem'])): ?> <!-- Se houver uma imagem associada à ação, exibe a imagem no carrossel -->
                                     <img src="<?php echo $_SESSION['url']['root'] . ltrim($acao['imagem'], '/'); ?>" class="d-block w-100" alt="Ação ONG" style="height: 420px; object-fit: cover; opacity: 0.85;">
                                 <?php else: ?> 
                                     <div class="d-block w-100 bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center" style="height: 420px;"> 
